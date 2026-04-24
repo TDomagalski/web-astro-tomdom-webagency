@@ -297,12 +297,95 @@ Nie prowadzimy osobnego pliku błędów. Zamiast tego:
 - jest to zachowanie odbiegające od oficjalnej dokumentacji
 - może się powtórzyć przy kolejnych etapach lub sesjach
 
+## Mobile-first
+
+Strona projektowana i kodowana w podejściu **mobile-first** — bezpośredni wpływ na SEO (Google indeksuje wersję mobilną jako główną).
+
+### Zasada ogólna
+
+Styl bazowy = mobile. Breakpointy Tailwinda rozszerzają go na większe ekrany. Nigdy odwrotnie.
+
+```html
+<!-- ✅ poprawnie: mobile base, desktop override -->
+<p class="text-base md:text-lg lg:text-xl">...</p>
+<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">...</ul>
+
+<!-- ❌ niepoprawnie: desktop base, mobile override -->
+<p class="text-xl max-sm:text-base">...</p>
+```
+
+### Breakpointy (domyślne Tailwind)
+
+| Breakpoint | Szerokość | Cel |
+|------------|-----------|-----|
+| *(brak)*   | 0–639px   | Telefony — baza projektu |
+| `sm:`      | 640px+    | Duże telefony / małe tablety |
+| `md:`      | 768px+    | Tablety |
+| `lg:`      | 1024px+   | Laptopy / desktop |
+| `xl:`      | 1280px+   | Szerokie monitory |
+
+Docelowe urządzenie priorytetowe: **standardowy telefon ~390px** (iPhone 14, Pixel 8). Desktop minimum 1280px.
+
+### Typografia — skalowanie między mobile a desktop
+
+Zawsze skalować rozmiary nagłówków i kluczowych tekstów:
+
+```html
+<h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl">...</h1>
+<h2 class="text-xl sm:text-2xl lg:text-3xl">...</h2>
+<p class="text-base lg:text-lg">...</p>
+```
+
+Nie używać stałych rozmiarów dla nagłówków bez responsywnych odpowiedników.
+
+### Układy — różne kolumny na różnych ekranach
+
+Każdy układ siatkowy musi mieć wariant mobilny (1 kolumna) i desktopowy:
+
+```html
+<!-- Siatka kart (np. portfolio, usługi) -->
+<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+
+<!-- Layout dwukolumnowy (np. O mnie) -->
+<div class="grid grid-cols-1 lg:grid-cols-3">
+
+<!-- Flex — pionowo na mobile, poziomo na desktop -->
+<div class="flex flex-col sm:flex-row">
+```
+
+### Elementy interaktywne — standard Apple/Google (44×44px)
+
+Każdy element klikalny (przycisk, link, toggle) musi mieć minimalny obszar dotyku 44×44px:
+
+- Przyciski: `min-h-[44px] px-4` lub `h-11` (44px = `h-11` w Tailwindzie)
+- Linki nawigacyjne: dodawać `py-3` na mobile jeśli są w liście
+- Ikony-przyciski: opakować w `div` lub `button` z `h-11 w-11`
+- Przełączniki (dark mode, hamburger): minimum `h-9 w-9` — sprawdzać czy wystarczy w kontekście
+
+### Kolejność treści w HTML a SEO
+
+Kolejność elementów w HTML = kolejność odczytu przez Google i czytniki ekranowe. Zasady:
+
+- Najważniejsza treść strony zawsze **wyżej w HTML** — niezależnie od tego gdzie pojawia się wizualnie
+- Nagłówek `<h1>` zawsze przed resztą treści strony
+- Na mobile układ pionowy musi być logiczny bez CSS (sprawdzać przez DevTools → Responsive)
+- Nie używać `order-` w Flexbox/Grid do odwracania kolejności ważnych treści — to myli Google
+
+### Checklist mobile przed każdym commitem
+
+Przed każdym nowym komponentem lub stroną sprawdzić:
+- [ ] Style bazowe działają na 390px bez poziomego scrolla
+- [ ] Nagłówki mają responsywne rozmiary (`text-Xpx sm:text-Ypx`)
+- [ ] Siatki mają wariant 1-kolumnowy na mobile
+- [ ] Elementy interaktywne mają min. 44px obszaru dotyku
+- [ ] Kolejność HTML jest logiczna bez CSS
+
 ## Ważne zasady pracy
 
 - Zawsze pisać **czysty, semantyczny HTML** (odpowiednie tagi: `<header>`, `<main>`, `<section>`, `<nav>`, `<footer>`)
 - Zachować przyjazną pod SEO hierarchie nagłówków `<h1>`-`<h6>`
 - Dostępność (a11y): atrybuty `alt`, `aria-label` tam gdzie potrzebne
-- Responsywność: mobile-first z Tailwind breakpoints
+- Responsywność: **mobile-first** — style bazowe dla mobile, breakpointy rozszerzają na desktop
 - Nie dodawać niepotrzebnych zależności — jeśli można zrobić w czystym Astro/Tailwind, robimy tak
 - Nie implementować funkcji nieplanowanych w bieżącym etapie
 - Kod pisać po angielsku (nazwy zmiennych, komponentów), treści i komentarze po polsku
