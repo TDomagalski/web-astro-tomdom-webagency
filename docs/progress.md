@@ -108,7 +108,7 @@ Config w `src/content.config.ts` (nie w `src/content/config.ts`). Używa `glob` 
 > ⚠️ Apostrofy w atrybutach Astro: `'I\'m...'` nie działa — używać template literals: `` {`I'm...`} ``
 
 ### ESLint + peer deps
-> ⚠️ `eslint-plugin-jsx-a11y@6`: peer dep na ESLint ≤9, działa z ESLint 10. Zawsze instalować z `--legacy-peer-deps`.
+> ⚠️ `eslint-plugin-jsx-a11y@6`: peer dep na ESLint ≤9, działa z ESLint 10. Zawsze instalować z `--legacy-peer-deps`. Dodano `.npmrc` z `legacy-peer-deps=true` — rozwiązuje ten sam problem na Vercelu i innych CI/CD które nie używają tej flagi domyślnie.
 
 ### Hamburger menu — pominięte przy pierwszej implementacji
 > ⚠️ `NavBar.astro`: hamburger menu nie zostało zaimplementowane w Etapie 1 — linki `hidden md:flex` były widoczne tylko na desktop, na mobile nie było żadnego menu. Naprawione po zgłoszeniu przez użytkownika. Przy kolejnych nawigacjach zawsze sprawdzać czy mobile menu jest zaimplementowane.
