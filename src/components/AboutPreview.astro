@@ -20,21 +20,21 @@ const { sectionNumber, heading, paragraph1, paragraph2, linkLabel, linkHref, hig
 
 <section class="border-t border-gray-100 dark:border-gray-800">
   <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-    <div class="mb-12 flex items-center gap-4">
+    <div class="scroll-animate mb-12 flex items-center gap-4">
       <span class="font-mono text-sm text-accent">{sectionNumber}</span>
-      <h2 class="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
+      <h2 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-gray-100 sm:text-2xl">
         {heading}
       </h2>
       <div class="h-px flex-1 bg-gray-100 dark:bg-gray-800"></div>
     </div>
 
     <div class="grid gap-12 lg:grid-cols-2 lg:gap-20">
-      <div class="flex flex-col gap-5">
+      <div class="scroll-animate flex flex-col gap-5" data-delay="100">
         <p class="leading-relaxed text-gray-600 dark:text-gray-400" set:html={paragraph1} />
         <p class="leading-relaxed text-gray-600 dark:text-gray-400">{paragraph2}</p>
         <a
           href={linkHref}
-          class="mt-2 inline-flex items-center gap-2 text-sm font-medium text-accent transition-colors hover:text-accent-hover"
+          class="mt-2 inline-flex min-h-[44px] items-center gap-2 text-sm font-medium text-accent transition-colors hover:text-accent-hover"
         >
           {linkLabel}
           <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -43,7 +43,7 @@ const { sectionNumber, heading, paragraph1, paragraph2, linkLabel, linkHref, hig
         </a>
       </div>
 
-      <ul class="flex flex-col gap-4">
+      <ul class="scroll-animate flex flex-col gap-4" data-delay="200">
         {
           highlights.map(({ label, value }) => (
             <li class="flex flex-col gap-1 border-l-2 border-accent pl-4">

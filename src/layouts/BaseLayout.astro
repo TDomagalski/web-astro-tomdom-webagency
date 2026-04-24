@@ -4,7 +4,7 @@ import '../styles/global.css'
 import Footer from '../components/Footer.astro'
 import NavBar from '../components/NavBar.astro'
 import SEO from '../components/SEO.astro'
-import { getLangCode, type Locale,navLinks } from '../i18n/index'
+import { getLangCode, type Locale, navLinks } from '../i18n/index'
 
 interface Props {
   title: string
@@ -45,3 +45,30 @@ const lang = getLangCode(locale)
     <Footer locale={locale} />
   </body>
 </html>
+
+<script>
+  // Intersection Observer — animacje przy scrollowaniu
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (!prefersReduced) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement
+            const delay = parseInt(el.dataset.delay ?? '0', 10)
+            el.style.transitionDelay = `${delay}ms`
+            el.classList.add('is-visible')
+            observer.unobserve(el)
+          }
+        })
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    )
+
+    document.querySelectorAll('.scroll-animate').forEach((el) => observer.observe(el))
+  } else {
+    // prefers-reduced-motion — pokaż wszystko od razu
+    document.querySelectorAll('.scroll-animate').forEach((el) => el.classList.add('is-visible'))
+  }
+</script>

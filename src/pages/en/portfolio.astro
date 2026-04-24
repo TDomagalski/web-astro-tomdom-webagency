@@ -26,10 +26,13 @@ const formatDate = (date: Date) =>
   <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
     <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
-        projects.map((project) => {
+        projects.map((project, index) => {
           const slug = project.id.replace(/\.md$/, '')
           return (
-            <li class="group flex flex-col rounded-xl border border-gray-100 transition-colors hover:border-gray-200 dark:border-gray-800 dark:hover:border-gray-700">
+            <li
+              class="scroll-animate group flex flex-col rounded-xl border border-gray-100 transition-all duration-200 hover:-translate-y-1 hover:border-gray-200 hover:shadow-md dark:border-gray-800 dark:hover:border-gray-700 dark:hover:shadow-gray-900/50"
+              data-delay={index * 100}
+            >
               <div class="flex h-44 items-center justify-center rounded-t-xl bg-gray-50 dark:bg-gray-900">
                 <span class="font-mono text-2xl text-gray-200 dark:text-gray-700">&lt;/&gt;</span>
               </div>
