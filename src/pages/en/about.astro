@@ -1,0 +1,129 @@
+---
+import PageHeader from '../../components/PageHeader.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const values = [
+  {
+    label: 'Quality over quantity',
+    description:
+      'I take on a limited number of projects so I can give each one full attention. I prefer to do less and do it well.',
+  },
+  {
+    label: 'Clear communication',
+    description:
+      "I keep clients in the loop at every stage. No surprises, no jargon — just clear information about what's happening and when.",
+  },
+  {
+    label: 'Long-term thinking',
+    description:
+      'I design with the future in mind — code that can grow, sites that can be maintained, solutions that scale.',
+  },
+]
+
+const stack = [
+  { category: 'Frontend', items: ['Astro', 'React', 'TypeScript', 'Tailwind CSS'] },
+  { category: 'Backend / API', items: ['Node.js', 'REST API', 'Headless CMS'] },
+  { category: 'Tools', items: ['Git', 'GitHub', 'Vercel', 'Figma'] },
+  { category: 'SEO & performance', items: ['Core Web Vitals', 'Schema.org', 'Lighthouse'] },
+]
+---
+
+<BaseLayout
+  title="About"
+  description="Learn more about Tomasz Domagalski and TomDevWeb — a freelancer building modern websites with a passion for clean code."
+  locale="en"
+  alternateHref="/o-mnie"
+>
+  <PageHeader
+    label="&lt;about /&gt;"
+    title="Tomasz Domagalski"
+    description="Freelancer and founder of TomDevWeb. I design and build websites that are fast, accessible and crafted with attention to every detail."
+  />
+
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <div class="grid gap-16 lg:grid-cols-3">
+      <div class="flex flex-col gap-8 lg:col-span-2">
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-4">
+            <span class="font-mono text-sm text-accent">01.</span>
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">Background</h2>
+            <div class="h-px flex-1 bg-gray-100 dark:bg-gray-800"></div>
+          </div>
+          <div class="flex flex-col gap-4 pl-8 text-gray-600 dark:text-gray-400">
+            <p class="leading-relaxed">
+              I build websites because I enjoy combining two things: technical precision and
+              thinking about the user. Every project is a puzzle — fitting together technology,
+              design and business goals so the whole thing makes sense.
+            </p>
+            <p class="leading-relaxed">
+              I work as an independent freelancer under the{' '}
+              <strong class="font-medium text-gray-900 dark:text-gray-100">TomDevWeb</strong>{' '}
+              brand. I work remotely from Poland, collaborating with clients from across the
+              country and beyond.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-4">
+            <span class="font-mono text-sm text-accent">02.</span>
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">How I work</h2>
+            <div class="h-px flex-1 bg-gray-100 dark:bg-gray-800"></div>
+          </div>
+          <ul class="flex flex-col gap-4 pl-8">
+            {
+              values.map(({ label, description }) => (
+                <li class="flex flex-col gap-1 border-l-2 border-accent pl-4">
+                  <span class="font-medium text-gray-900 dark:text-gray-100">{label}</span>
+                  <span class="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+                    {description}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <aside class="flex flex-col gap-6">
+        <div class="flex items-center gap-4">
+          <span class="font-mono text-sm text-accent">03.</span>
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">Stack</h2>
+        </div>
+        <ul class="flex flex-col gap-5 pl-8">
+          {
+            stack.map(({ category, items }) => (
+              <li class="flex flex-col gap-2">
+                <span class="font-mono text-xs text-gray-400 dark:text-gray-500">{category}</span>
+                <ul class="flex flex-wrap gap-2">
+                  {items.map((item) => (
+                    <li class="rounded-md bg-gray-50 px-2.5 py-1 font-mono text-xs text-gray-600 dark:bg-gray-900 dark:text-gray-400">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="mt-2 rounded-xl border border-gray-100 p-5 dark:border-gray-800">
+          <p class="mb-3 font-mono text-xs text-gray-400 dark:text-gray-500">location</p>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Słomniki, Poland<br />
+            <span class="text-gray-400 dark:text-gray-500">Remote — all of Poland</span>
+          </p>
+          <a
+            href="/en/contact"
+            class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-accent transition-colors hover:text-accent-hover"
+          >
+            Get in touch
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

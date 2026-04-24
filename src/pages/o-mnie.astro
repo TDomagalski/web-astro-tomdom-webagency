@@ -1,0 +1,132 @@
+---
+import PageHeader from '../components/PageHeader.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const values = [
+  {
+    label: 'Jakość ponad ilość',
+    description:
+      'Biorę ograniczoną liczbę projektów, żeby każdemu poświęcić pełną uwagę. Wolę zrobić mniej i zrobić to dobrze.',
+  },
+  {
+    label: 'Przejrzysta komunikacja',
+    description:
+      'Trzymam klienta w pętli na każdym etapie. Bez zaskoczeń, bez żargonu — po prostu jasna informacja o tym, co i kiedy.',
+  },
+  {
+    label: 'Długoterminowe myślenie',
+    description:
+      'Projektuję z myślą o przyszłości — kod który można rozbudować, strony które można utrzymać, rozwiązania które skalują.',
+  },
+]
+
+const stack = [
+  { category: 'Frontend', items: ['Astro', 'React', 'TypeScript', 'Tailwind CSS'] },
+  { category: 'Backend / API', items: ['Node.js', 'REST API', 'Headless CMS'] },
+  { category: 'Narzędzia', items: ['Git', 'GitHub', 'Vercel', 'Figma'] },
+  { category: 'SEO & wydajność', items: ['Core Web Vitals', 'Schema.org', 'Lighthouse'] },
+]
+---
+
+<BaseLayout
+  title="O mnie"
+  description="Dowiedz się więcej o Tomaszu Domagalskim i TomDevWeb — freelancerze tworzącym nowoczesne strony internetowe z pasją do czystego kodu."
+  locale="pl"
+  alternateHref="/en/about"
+>
+  <PageHeader
+    label="&lt;o mnie /&gt;"
+    title="Tomasz Domagalski"
+    description="Freelancer i twórca TomDevWeb. Projektuję i buduję strony internetowe, które są szybkie, dostępne i dopracowane w każdym szczególe."
+  />
+
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <div class="grid gap-16 lg:grid-cols-3">
+      <!-- Kolumna główna -->
+      <div class="flex flex-col gap-8 lg:col-span-2">
+        <!-- Historia -->
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-4">
+            <span class="font-mono text-sm text-accent">01.</span>
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">Historia</h2>
+            <div class="h-px flex-1 bg-gray-100 dark:bg-gray-800"></div>
+          </div>
+          <div class="flex flex-col gap-4 pl-8 text-gray-600 dark:text-gray-400">
+            <p class="leading-relaxed">
+              Tworzę strony internetowe bo lubię łączyć dwie rzeczy: precyzję techniczną i myślenie
+              o użytkowniku. Każdy projekt to dla mnie puzzle — trzeba dopasować technologię,
+              design i cel biznesowy tak, żeby całość miała sens.
+            </p>
+            <p class="leading-relaxed">
+              Działam jako niezależny freelancer pod marką <strong class="font-medium text-gray-900 dark:text-gray-100">TomDevWeb</strong>.
+              Pracuję zdalnie z Polski, współpracuję z klientami z całego kraju i nie tylko.
+            </p>
+          </div>
+        </div>
+
+        <!-- Wartości -->
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-4">
+            <span class="font-mono text-sm text-accent">02.</span>
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">Jak pracuję</h2>
+            <div class="h-px flex-1 bg-gray-100 dark:bg-gray-800"></div>
+          </div>
+          <ul class="flex flex-col gap-4 pl-8">
+            {
+              values.map(({ label, description }) => (
+                <li class="flex flex-col gap-1 border-l-2 border-accent pl-4">
+                  <span class="font-medium text-gray-900 dark:text-gray-100">{label}</span>
+                  <span class="text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+                    {description}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <!-- Sidebar — stack technologiczny -->
+      <aside class="flex flex-col gap-6">
+        <div class="flex items-center gap-4">
+          <span class="font-mono text-sm text-accent">03.</span>
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">Stack</h2>
+        </div>
+        <ul class="flex flex-col gap-5 pl-8">
+          {
+            stack.map(({ category, items }) => (
+              <li class="flex flex-col gap-2">
+                <span class="font-mono text-xs text-gray-400 dark:text-gray-500">{category}</span>
+                <ul class="flex flex-wrap gap-2">
+                  {items.map((item) => (
+                    <li class="rounded-md bg-gray-50 px-2.5 py-1 font-mono text-xs text-gray-600 dark:bg-gray-900 dark:text-gray-400">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ul>
+
+        <!-- Dane kontaktowe w skrócie -->
+        <div class="mt-2 rounded-xl border border-gray-100 p-5 dark:border-gray-800">
+          <p class="mb-3 font-mono text-xs text-gray-400 dark:text-gray-500">lokalizacja</p>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Słomniki, Polska<br />
+            <span class="text-gray-400 dark:text-gray-500">Praca zdalna — cała Polska</span>
+          </p>
+          <a
+            href="/kontakt"
+            class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-accent transition-colors hover:text-accent-hover"
+          >
+            Napisz do mnie
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

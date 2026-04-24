@@ -1,0 +1,121 @@
+---
+import PageHeader from '../components/PageHeader.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const contactDetails = [
+  {
+    label: 'E-mail',
+    value: 'kontakt@tomdevweb.pl',
+    href: 'mailto:kontakt@tomdevweb.pl',
+    mono: true,
+  },
+  {
+    label: 'Telefon',
+    value: '+48 600 000 000',
+    href: 'tel:+48600000000',
+    mono: true,
+  },
+  {
+    label: 'Lokalizacja',
+    value: 'ul. Krakowska 62d, 32-090 Słomniki',
+    hint: 'Praca zdalna — cała Polska',
+    mono: false,
+  },
+]
+---
+
+<BaseLayout
+  title="Kontakt"
+  description="Skontaktuj się z TomDevWeb — napisz lub zadzwoń. Odpowiadam w ciągu 24 godzin."
+  locale="pl"
+  alternateHref="/en/contact"
+>
+  <PageHeader
+    label="&lt;kontakt /&gt;"
+    title="Porozmawiajmy"
+    description="Masz pytanie, pomysł na projekt albo chcesz po prostu porozmawiać? Odezwij się — odpiszę w ciągu 24 godzin."
+  />
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <div class="grid gap-12 lg:grid-cols-2">
+      <!-- Dane kontaktowe -->
+      <div class="flex flex-col gap-8">
+        <div class="flex items-center gap-4">
+          <span class="font-mono text-sm text-accent">01.</span>
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">Dane kontaktowe</h2>
+          <div class="h-px flex-1 bg-gray-100 dark:bg-gray-800"></div>
+        </div>
+
+        <ul class="flex flex-col gap-6 pl-8">
+          {
+            contactDetails.map(({ label, value, href, hint, mono }) => (
+              <li class="flex flex-col gap-1">
+                <span class="font-mono text-xs text-gray-400 dark:text-gray-500">{label}</span>
+                {href ? (
+                  <a
+                    href={href}
+                    class:list={[
+                      'transition-colors hover:text-accent',
+                      mono
+                        ? 'font-mono text-sm text-gray-700 dark:text-gray-300'
+                        : 'text-gray-700 dark:text-gray-300',
+                    ]}
+                  >
+                    {value}
+                  </a>
+                ) : (
+                  <span
+                    class:list={[
+                      mono
+                        ? 'font-mono text-sm text-gray-700 dark:text-gray-300'
+                        : 'text-gray-700 dark:text-gray-300',
+                    ]}
+                  >
+                    {value}
+                  </span>
+                )}
+                {hint && (
+                  <span class="text-xs text-gray-400 dark:text-gray-500">{hint}</span>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Informacje dodatkowe -->
+      <div class="flex flex-col gap-8">
+        <div class="flex items-center gap-4">
+          <span class="font-mono text-sm text-accent">02.</span>
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">Jak działamy</h2>
+          <div class="h-px flex-1 bg-gray-100 dark:bg-gray-800"></div>
+        </div>
+
+        <ol class="flex flex-col gap-5 pl-8">
+          {
+            [
+              { step: '01', text: 'Piszesz do mnie z krótkim opisem projektu lub pytaniem.' },
+              { step: '02', text: 'Odpowiadam w ciągu 24 godzin i umawiam krótką rozmowę.' },
+              { step: '03', text: 'Omawiamy szczegóły i przygotowuję wycenę bez zobowiązań.' },
+              { step: '04', text: 'Startujemy — ustalamy harmonogram i zabieramy się do pracy.' },
+            ].map(({ step, text }) => (
+              <li class="flex gap-4">
+                <span class="mt-0.5 shrink-0 font-mono text-xs text-accent">{step}.</span>
+                <span class="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{text}</span>
+              </li>
+            ))
+          }
+        </ol>
+
+        <!-- Dostępność -->
+        <div class="rounded-xl border border-gray-100 p-5 dark:border-gray-800 pl-8">
+          <p class="mb-1 font-mono text-xs text-gray-400 dark:text-gray-500">dostępność</p>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Aktualnie przyjmuję nowe projekty.<br />
+            <span class="text-gray-400 dark:text-gray-500">Czas odpowiedzi: do 24h w dni robocze.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,81 @@
+---
+import PageHeader from '../../components/PageHeader.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+
+const services = [
+  {
+    number: '01',
+    title: 'Websites',
+    description:
+      'I design and build business websites, landing pages and portfolios. Every site is responsive, fast and SEO-optimised from day one.',
+    tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
+  },
+  {
+    number: '02',
+    title: 'Online stores',
+    description:
+      'I deliver e-commerce solutions scaled to your business — from simple shops to advanced headless platforms with payment integrations.',
+    tags: ['E-commerce', 'Headless', 'API'],
+  },
+  {
+    number: '03',
+    title: 'Optimisation & performance',
+    description:
+      'I audit existing websites and improve their results — Core Web Vitals, technical SEO, load times. Your site will be visible and fast.',
+    tags: ['Core Web Vitals', 'SEO', 'Lighthouse'],
+  },
+  {
+    number: '04',
+    title: 'Maintenance & support',
+    description:
+      'I offer long-term technical care — updates, monitoring, small fixes and continued development as your business needs evolve.',
+    tags: ['Hosting', 'Monitoring', 'Updates'],
+  },
+]
+---
+
+<BaseLayout
+  title="Services"
+  description="Web design, e-commerce, SEO optimisation and maintenance. See what I can do for you."
+  locale="en"
+  alternateHref="/uslugi"
+>
+  <PageHeader
+    label="&lt;services /&gt;"
+    title="What I can do for you"
+    description="I specialise in building websites that combine aesthetic design with a solid technical foundation."
+  />
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <ul class="grid gap-6 sm:grid-cols-2">
+      {
+        services.map(({ number, title, description, tags }) => (
+          <li class="flex flex-col gap-4 rounded-xl border border-gray-100 p-6 transition-colors hover:border-gray-200 dark:border-gray-800 dark:hover:border-gray-700">
+            <span class="font-mono text-sm text-accent">{number}.</span>
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">{title}</h2>
+            <p class="flex-1 leading-relaxed text-gray-500 dark:text-gray-400">{description}</p>
+            <ul class="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <li class="rounded-md bg-gray-50 px-2.5 py-1 font-mono text-xs text-gray-500 dark:bg-gray-900 dark:text-gray-400">
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-16 text-center">
+      <p class="mb-4 text-gray-500 dark:text-gray-400">
+        Don't see what you're looking for? Get in touch — we'll find a solution.
+      </p>
+      <a
+        href="/en/contact"
+        class="inline-flex items-center rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+      >
+        Discuss a project
+      </a>
+    </div>
+  </section>
+</BaseLayout>

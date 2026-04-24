@@ -1,0 +1,82 @@
+---
+import PageHeader from '../components/PageHeader.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const services = [
+  {
+    number: '01',
+    title: 'Strony internetowe',
+    description:
+      'Projektuję i buduję strony firmowe, landing page oraz portfolio. Każda strona jest responsywna, szybka i zoptymalizowana pod SEO od pierwszego dnia.',
+    tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
+  },
+  {
+    number: '02',
+    title: 'Sklepy internetowe',
+    description:
+      'Wdrażam rozwiązania e-commerce dopasowane do skali biznesu — od prostych sklepów po zaawansowane platformy headless z integracjami płatności.',
+    tags: ['E-commerce', 'Headless', 'API'],
+  },
+  {
+    number: '03',
+    title: 'Optymalizacja i wydajność',
+    description:
+      'Audytuję istniejące strony i poprawiam ich wyniki — Core Web Vitals, SEO techniczne, czas ładowania. Twoja strona będzie widoczna i szybka.',
+    tags: ['Core Web Vitals', 'SEO', 'Lighthouse'],
+  },
+  {
+    number: '04',
+    title: 'Utrzymanie i wsparcie',
+    description:
+      'Oferuję długoterminową opiekę techniczną — aktualizacje, monitoring, drobne poprawki i rozwój strony w miarę potrzeb Twojego biznesu.',
+    tags: ['Hosting', 'Monitoring', 'Aktualizacje'],
+  },
+]
+---
+
+<BaseLayout
+  title="Usługi"
+  description="Projektowanie stron internetowych, sklepy e-commerce, optymalizacja SEO i utrzymanie. Sprawdź co mogę dla Ciebie zrobić."
+  locale="pl"
+  alternateHref="/en/services"
+>
+  <PageHeader
+    label="&lt;usługi /&gt;"
+    title="Co mogę dla Ciebie zrobić"
+    description="Specjalizuję się w tworzeniu stron internetowych, które łączą estetyczny design z solidnym fundamentem technicznym."
+  />
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <ul class="grid gap-6 sm:grid-cols-2">
+      {
+        services.map(({ number, title, description, tags }) => (
+          <li class="flex flex-col gap-4 rounded-xl border border-gray-100 p-6 transition-colors hover:border-gray-200 dark:border-gray-800 dark:hover:border-gray-700">
+            <span class="font-mono text-sm text-accent">{number}.</span>
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100">{title}</h2>
+            <p class="flex-1 leading-relaxed text-gray-500 dark:text-gray-400">{description}</p>
+            <ul class="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <li class="rounded-md bg-gray-50 px-2.5 py-1 font-mono text-xs text-gray-500 dark:bg-gray-900 dark:text-gray-400">
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- CTA pod listą usług -->
+    <div class="mt-16 text-center">
+      <p class="mb-4 text-gray-500 dark:text-gray-400">
+        Nie widzisz tego, czego szukasz? Skontaktuj się — znajdziemy rozwiązanie.
+      </p>
+      <a
+        href="/kontakt"
+        class="inline-flex items-center rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+      >
+        Omów projekt
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,43 @@
+---
+import AboutPreview from '../components/AboutPreview.astro'
+import CTASection from '../components/CTASection.astro'
+import HeroSection from '../components/HeroSection.astro'
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Strona główna"
+  description="TomDevWeb — projektuję i buduję nowoczesne strony internetowe. Szybkie, dostępne i dopracowane w każdym szczególe."
+  locale="pl"
+  alternateHref="/en/"
+>
+  <HeroSection
+    label="&lt;web developer /&gt;"
+    headingTop="Tworzę strony,"
+    headingBottom="które"
+    headingAccent="robią wrażenie"
+    description="Projektuję i buduję nowoczesne strony internetowe — szybkie, dostępne i dopracowane w każdym szczególe. Jeśli zależy Ci na jakości, jesteś we właściwym miejscu."
+    primaryCta={{ label: 'Porozmawiajmy', href: '/kontakt' }}
+    secondaryCta={{ label: 'Zobacz portfolio', href: '/portfolio' }}
+  />
+  <AboutPreview
+    sectionNumber="01."
+    heading="O mnie"
+    paragraph1='Cześć, jestem <strong class="font-medium text-gray-900 dark:text-gray-100">Tomasz Domagalski</strong> — freelancer i założyciel TomDevWeb. Tworzę strony internetowe z dbałością o każdy detal: od struktury kodu, przez wydajność, aż po doświadczenie użytkownika.'
+    paragraph2="Wierzę, że dobra strona to nie tylko estetyka — to narzędzie, które pracuje na Twój cel. Dlatego każdy projekt traktuję indywidualnie i z pełnym zaangażowaniem."
+    linkLabel="Poznaj mnie bliżej"
+    linkHref="/o-mnie"
+    highlights={[
+      { label: 'Technologie', value: 'Astro, TypeScript, React, Tailwind CSS' },
+      { label: 'Specjalizacja', value: 'Strony firmowe, landing page, portfolio' },
+      { label: 'Podejście', value: 'Czysty kod, wydajność, dostępność (a11y)' },
+    ]}
+  />
+  <CTASection
+    label="// następny krok"
+    heading="Masz projekt? Zacznijmy."
+    description="Opowiedz mi o swoim pomyśle — odpiszę w ciągu 24 godzin i wspólnie ustalimy, jak mogę pomóc."
+    buttonLabel="Napisz do mnie"
+    buttonHref="/kontakt"
+  />
+</BaseLayout>

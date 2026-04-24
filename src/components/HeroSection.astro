@@ -1,0 +1,44 @@
+---
+interface Props {
+  label: string
+  headingTop: string
+  headingBottom: string
+  headingAccent: string
+  description: string
+  primaryCta: { label: string; href: string }
+  secondaryCta: { label: string; href: string }
+}
+
+const { label, headingTop, headingBottom, headingAccent, description, primaryCta, secondaryCta } =
+  Astro.props
+---
+
+<section class="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:py-32">
+  <div class="max-w-3xl">
+    <span class="mb-6 inline-block font-mono text-sm text-accent">{label}</span>
+
+    <h1 class="mb-6 text-4xl font-semibold leading-tight tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl lg:text-6xl">
+      {headingTop}<br />
+      {headingBottom}&nbsp;<span class="text-accent">{headingAccent}</span>.
+    </h1>
+
+    <p class="mb-10 max-w-xl text-lg leading-relaxed text-gray-500 dark:text-gray-400">
+      {description}
+    </p>
+
+    <div class="flex flex-wrap gap-4">
+      <a
+        href={primaryCta.href}
+        class="inline-flex items-center rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-hover"
+      >
+        {primaryCta.label}
+      </a>
+      <a
+        href={secondaryCta.href}
+        class="inline-flex items-center rounded-lg border border-gray-200 px-6 py-3 text-sm font-medium text-gray-700 transition-colors hover:border-gray-300 hover:text-gray-900 dark:border-gray-700 dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-gray-100"
+      >
+        {secondaryCta.label}
+      </a>
+    </div>
+  </div>
+</section>

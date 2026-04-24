@@ -1,0 +1,59 @@
+---
+import type { Locale } from '../i18n/index'
+
+interface Props {
+  title: string
+  description: string
+  ogImage?: string
+  canonicalUrl?: string
+  locale?: Locale
+  alternateHref?: string
+}
+
+const {
+  title,
+  description,
+  ogImage = '/og-default.png',
+  canonicalUrl = Astro.url.href,
+  locale = 'pl',
+  alternateHref,
+} = Astro.props
+
+const siteName = 'TomDevWeb'
+const fullTitle = `${title} | ${siteName}`
+const ogLocale = locale === 'pl' ? 'pl_PL' : 'en_US'
+
+const alternateLang = locale === 'pl' ? 'en' : 'pl'
+const alternateUrl = alternateHref ? new URL(alternateHref, Astro.site).href : undefined
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(ogImage, Astro.site)} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:locale" content={ogLocale} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="180x180" href="/favicon-180x180.png" />
+
+<!-- Hreflang dla wersji językowych -->
+<link rel="alternate" hreflang={locale} href={canonicalUrl} />
+{alternateUrl && <link rel="alternate" hreflang={alternateLang} href={alternateUrl} />}
+<link rel="alternate" hreflang="x-default" href={locale === 'pl' ? canonicalUrl : (alternateUrl ?? canonicalUrl)} />

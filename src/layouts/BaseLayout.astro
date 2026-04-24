@@ -1,0 +1,47 @@
+---
+import '../styles/global.css'
+
+import Footer from '../components/Footer.astro'
+import NavBar from '../components/NavBar.astro'
+import SEO from '../components/SEO.astro'
+import { getLangCode, type Locale,navLinks } from '../i18n/index'
+
+interface Props {
+  title: string
+  description: string
+  ogImage?: string
+  locale?: Locale
+  alternateHref?: string
+}
+
+const { title, description, ogImage, locale = 'pl', alternateHref } = Astro.props
+const lang = getLangCode(locale)
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <SEO
+      title={title}
+      description={description}
+      ogImage={ogImage}
+      locale={locale}
+      alternateHref={alternateHref}
+    />
+    <!-- Skrypt zapobiegający migotaniu przy ładowaniu strony (FOUC) -->
+    <script is:inline>
+      const saved = localStorage.getItem('theme')
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark')
+      }
+    </script>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <NavBar locale={locale} links={navLinks[locale]} alternateHref={alternateHref} />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+  </body>
+</html>

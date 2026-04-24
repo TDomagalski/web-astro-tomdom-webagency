@@ -1,0 +1,43 @@
+---
+import AboutPreview from '../../components/AboutPreview.astro'
+import CTASection from '../../components/CTASection.astro'
+import HeroSection from '../../components/HeroSection.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Home"
+  description="TomDevWeb — I design and build modern websites. Fast, accessible and crafted with attention to every detail."
+  locale="en"
+  alternateHref="/"
+>
+  <HeroSection
+    label="&lt;web developer /&gt;"
+    headingTop="I build websites"
+    headingBottom="that"
+    headingAccent="make an impression"
+    description="I design and build modern websites — fast, accessible and crafted with attention to every detail. If quality matters to you, you're in the right place."
+    primaryCta={{ label: "Let's talk", href: '/en/contact' }}
+    secondaryCta={{ label: 'View portfolio', href: '/en/portfolio' }}
+  />
+  <AboutPreview
+    sectionNumber="01."
+    heading="About me"
+    paragraph1={`Hi, I'm <strong class="font-medium text-gray-900 dark:text-gray-100">Tomasz Domagalski</strong> — freelancer and founder of TomDevWeb. I build websites with attention to every detail: from code structure, through performance, to user experience.`}
+    paragraph2="I believe a great website is more than aesthetics — it's a tool that works toward your goal. That's why I approach every project individually and with full commitment."
+    linkLabel="Learn more about me"
+    linkHref="/en/about"
+    highlights={[
+      { label: 'Technologies', value: 'Astro, TypeScript, React, Tailwind CSS' },
+      { label: 'Specialization', value: 'Business websites, landing pages, portfolios' },
+      { label: 'Approach', value: 'Clean code, performance, accessibility (a11y)' },
+    ]}
+  />
+  <CTASection
+    label="// next step"
+    heading="Got a project? Let's start."
+    description="Tell me about your idea — I'll reply within 24 hours and we'll figure out how I can help."
+    buttonLabel="Get in touch"
+    buttonHref="/en/contact"
+  />
+</BaseLayout>
