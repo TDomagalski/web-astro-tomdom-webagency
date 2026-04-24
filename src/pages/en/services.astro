@@ -51,7 +51,7 @@ const services = [
       {
         services.map(({ number, title, description, tags }, index) => (
           <li
-            class="scroll-animate flex flex-col gap-4 rounded-xl border border-gray-100 p-6 transition-all duration-200 hover:-translate-y-1 hover:border-gray-200 hover:shadow-md dark:border-gray-800 dark:hover:border-gray-700 dark:hover:shadow-gray-900/50"
+            class="scroll-animate flex flex-col gap-4 rounded-xl border border-gray-100 p-6 transition-all duration-200 hover:border-gray-200 dark:border-gray-800 dark:hover:border-gray-700 md:hover:-translate-y-1 md:hover:shadow-md md:dark:hover:shadow-gray-900/50"
             data-delay={index * 100}
           >
             <span class="font-mono text-sm text-accent">{number}.</span>

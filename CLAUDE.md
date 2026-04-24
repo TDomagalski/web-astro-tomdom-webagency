@@ -371,6 +371,29 @@ Kolejność elementów w HTML = kolejność odczytu przez Google i czytniki ekra
 - Na mobile układ pionowy musi być logiczny bez CSS (sprawdzać przez DevTools → Responsive)
 - Nie używać `order-` w Flexbox/Grid do odwracania kolejności ważnych treści — to myli Google
 
+### Animacje — co działa na mobile, co nie
+
+Na urządzeniach dotykowych `hover:` nie działa lub "wisi" po tapnięciu — użytkownik nie może zabrać palca z ekranu tak jak myszy. Zasada:
+
+**Animacje i efekty TYLKO na `md:+`** (dodawać prefiks `md:hover:` zamiast `hover:`):
+- Transformy: `md:hover:-translate-y-1`, `md:hover:scale-105`
+- Cienie przy hover: `md:hover:shadow-md`, `md:hover:shadow-lg`
+- Inne efekty wizualne oparte na hover z opóźnieniem lub transformacją
+
+**Animacje i efekty DOZWOLONE wszędzie** (w tym mobile):
+- Zmiany koloru: `hover:text-accent`, `hover:bg-accent-hover`, `hover:border-gray-300` — subtelne, nie zostawiają artefaktów
+- Stan `active:`: `active:scale-[0.98]` — działa na tap, daje feedback dotykowy ✅
+- Animacje CSS przy załadowaniu (hero, scroll-animate) — nie zależą od hover
+- Przejścia `transition-colors` — OK wszędzie
+
+```html
+<!-- ✅ poprawnie -->
+<li class="transition-all hover:border-gray-300 md:hover:-translate-y-1 md:hover:shadow-md">
+
+<!-- ❌ niepoprawnie — hover transform na mobile -->
+<li class="hover:-translate-y-1 hover:shadow-md">
+```
+
 ### Checklist mobile przed każdym commitem
 
 Przed każdym nowym komponentem lub stroną sprawdzić:
@@ -379,6 +402,7 @@ Przed każdym nowym komponentem lub stroną sprawdzić:
 - [ ] Siatki mają wariant 1-kolumnowy na mobile
 - [ ] Elementy interaktywne mają min. 44px obszaru dotyku
 - [ ] Kolejność HTML jest logiczna bez CSS
+- [ ] Hover transforms i cienie mają prefiks `md:hover:` — nie `hover:`
 
 ## Ważne zasady pracy
 
